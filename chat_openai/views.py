@@ -11,7 +11,7 @@ from django.views import View
 openai.api_key = settings.OPENAI_API_KEY
 
 # ID del modello che desideri utilizzare
-MODEL_ID = 'gpt-4'
+MODEL_ID = 'gpt-3.5-turbo-16k'
 
 # La tua vista chat esistente
 def chat(request):
@@ -23,6 +23,10 @@ class ChatBotView(View):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         message = data.get('message')
+        MAX_REPLY_TOKENS=7500
+        
+        # Stampa il messaggio qui
+        print("Messaggio inviato:", message)
 
         try:
             # Comunicazione con OpenAI e ricezione della risposta
@@ -37,10 +41,13 @@ class ChatBotView(View):
                         "role": "user",
                         "content": message
                     }
-                ],
+                    ],
                 temperature=0.2,
-                max_tokens=990
+                max_tokens=7500
             )
+            
+            # Stampa la risposta completa qui
+            print("Risposta completa da OpenAI:", response)
 
             # Estrai il messaggio dalla risposta
             bot_reply = response.choices[0].message.content.strip()
@@ -59,6 +66,7 @@ def upload_tuning_file(request):
                 response = openai.File.create(file=f, purpose="fine-tuning")
             return JsonResponse({"file_id": response.id})
         except Exception as e:
+            print(e)
             return HttpResponseServerError(str(e))
     else:
         return render(request, 'upload.html')
