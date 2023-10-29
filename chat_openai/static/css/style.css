@@ -1,0 +1,43 @@
+
+/* stile.css */
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.chat-container {
+    max-width: 600px;
+    margin: 50px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.chat-box {
+    max-height: 400px;
+    font-size: 18px;
+    overflow-y: auto;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.input-box {
+    display: flex;
+    margin-top: 10px;
+}
+
+.input-box input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+}
+
+.input-box button {
+    padding: 0 15px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #4CAF50;
+    color: #FFF;
+}
+
